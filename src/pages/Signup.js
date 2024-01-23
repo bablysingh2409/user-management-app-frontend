@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import {signup} from '../services/api'
+import { useDispatch,useSelector } from 'react-redux';
+import { authSelector,action } from '../redux/reducers/authReducer';
 
 
 function Signup() {
@@ -12,7 +15,11 @@ function Signup() {
         source: [],
         city: '',
         state: 'Maharashtra'
-    })
+    });
+
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
+
 
     const citiesToState = {
         Mumbai: 'Maharashtra',
@@ -20,33 +27,25 @@ function Signup() {
         Ahmedabad: 'Gujarat',
     }
 
-    const handleTextChange = (e) => {
-        const { value, checked, name } = e.target;
-        const updatedSource = checked
-            ? [...userData.source, value]
-            : userData.source.filter((item) => item !== value);
+ const handleTextChange=(e)=>{
+    const {value,name}=e.target;
+    setUserData({
+        ...userData,
+        [name]:value,
+    })
+ }
 
-        setUserData({
-            ...userData,
-            source: updatedSource
-        });
-
-        if (name === 'city') {
+    const handleDropDownChange = (e) => {
+        const { value, name } = e.target;
+    
             setUserData({
                 ...userData,
+                [name]:value,
                 state: citiesToState[value]
             })
-        }
+        
     }
     const handleRadioChange = (e) => {
-        const { value, name } = e.target;
-        setUserData({
-            ...userData,
-            [name]: value
-        });
-    };
-
-    const handleDropdownChange = (e) => {
         const { value, name } = e.target;
         setUserData({
             ...userData,
@@ -68,6 +67,21 @@ function Signup() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+
+            const data = await signup(userData);
+               dispatch(action.setUser(data));
+
+            // Handling the response or navigate to a different page
+            // console.log('Signup successful:', response.data);
+           
+
+            //  navigating to another page upon successful signup
+            navigate('/login');
+        } catch (error) {
+            // Handle signup failure, show an error message, etc.
+            console.error('Signup failed:', error.message);
+        }
 
     };
 
@@ -153,7 +167,7 @@ function Signup() {
                     <label htmlFor="city" className='text-xl pl-2 font-bold mt-4' >City:</label>
                     <div>
                         <select id="city" name="city" required className='flex justify-center gap-4 flex-col p-2 
-                    mt-2 border-2  text-lg font-semibold' onChange={handleTextChange}>
+                    mt-2 border-2  text-lg font-semibold'  onChange={handleDropDownChange}>
                             <option value="Mumbai" className='text-lg font-semibold'>Mumbai</option>
                             <option value="Pune" className='text-lg font-semibold'>Pune</option>
                             <option value="Ahmedabad" className='text-lg font-semibold' >Ahmedabad</option>
@@ -162,7 +176,7 @@ function Signup() {
 
 
                     <label htmlFor="state" className='text-xl pl-2 font-bold mt-4'>State:</label>
-                    <input type="text" id="state" name="state" value={userData.state} readonly className='w-[60%] p-1 border-2 
+                    <input type="text" id="state" name="state" value={userData.state} readOnly className='w-[60%] p-1 border-2 
             border-[#B6BBC4] rounded-md text-lg m-2'/>
 
 
