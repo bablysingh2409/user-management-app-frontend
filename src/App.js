@@ -1,14 +1,16 @@
-import { createBrowserRouter,RouterProvider } from "react-router-dom";
+import {createBrowserRouter,Navigate,Route,RouterProvider, Routes } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Nav from "./components/Nav";
-import UserList from "./components/UserList";
 import UserDetails from "./components/UserDetails";
 import CreateUser from "./components/CreateUser";
 import EditUser from "./components/EditUser";
+import { useSelector } from "react-redux";
+import { authSelector } from "./redux/reducers/authReducer";
 
 function App() {
+  const {isAuthenticated}=useSelector(authSelector);
 
 const router=createBrowserRouter([
   {
@@ -17,28 +19,29 @@ const router=createBrowserRouter([
     children:[
       {
         path:'/',
+        // element:isAuthenticated ? <Home/>: <Navigate to="/" />
         element:<Home/>
     
       },
       {
         path:'/signup',
-        element:<Signup/>
+        element: !isAuthenticated ?<Signup/>:<Navigate to="/" />
       },
       {
         path:'/login',
-        element:<Login/>
+        element:!isAuthenticated? <Login/>: <Navigate to="/" />
       },
       {
          path:'/user-details/:id',
-         element:<UserDetails/>
+         element:isAuthenticated ? <UserDetails/>: <Navigate to="/" />
       },
      {
       path:'create-user',
-      element:<CreateUser/>
+      element:isAuthenticated ?<CreateUser/>:<Navigate to="/" />
      },
      {
       path:'edit-user/:id',
-      element:<EditUser/>
+      element:isAuthenticated ?<EditUser/>:<Navigate to="/" />
      }
     ]
   }
@@ -47,9 +50,9 @@ const router=createBrowserRouter([
 
   return (
     <RouterProvider router={router}>
-    <div className="App">
-      
-    </div>
+      <Routes>
+        <Route path="/*" element={<Navigate to="/" />} />
+      </Routes>
     </RouterProvider>
   );
 }

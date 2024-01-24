@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { userSelector } from '../redux/reducers/userReducer'
+import { removeUser } from '../redux/actions/userActions';
 
 function UserDetails() {
    const {id}=useParams();
    const {users}=useSelector(userSelector);
    const [user,setUser]=useState([]);
    const navigate=useNavigate();
+   const dispatch=useDispatch();
 
    useEffect(()=>{
        const selectedUser= users.filter((user)=>user._id===id) ;
@@ -16,6 +18,14 @@ function UserDetails() {
 
 const handleEdit=(userId)=>{
        navigate(`/edit-user/${userId}`)
+}
+
+const handleDelete=(userId)=>{
+    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+    if (confirmDelete) {
+        dispatch(removeUser(userId));
+        navigate('/');
+      }
 }
 
   return (
@@ -35,7 +45,7 @@ const handleEdit=(userId)=>{
                          </div>
                          <div className='w-[50%]  flex gap-4 p-2 justify-evenly m-auto flex-col'>
                             <button className='mt-3 p-2  bg-[#B80000] border-2 border-[#B80000] w-[50%] m-auto text-xl font-bold text-white hover:border-2 hover:bg-white
-                             hover:text-[#B80000] rounded'>Delete</button>
+                             hover:text-[#B80000] rounded' onClick={()=>handleDelete(u._id)}>Delete</button>
                             <button className='mt-3 p-2  border-2 border-[#294B29] bg-[#294B29] w-[50%] m-auto text-xl font-bold text-white hover:text-[#294B29]
                                      hover:bg-white rounded' onClick={()=>handleEdit(u._id)}>Edit</button>
                          </div>
