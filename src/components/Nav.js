@@ -30,7 +30,7 @@ function Nav() {
                                 <div className='p-3'>
                                     <ul className='flex justify-around'>
                                         <li className='text-xl text-white font-semibold hover:text-[#053B50] '><Link to='/'>Home</Link></li>
-                                        <li className='text-xl text-white font-semibold hover:text-[#053B50] '><Link to='/profile'>Create User</Link></li>
+                                        <li className='text-xl text-white font-semibold hover:text-[#053B50] '><Link to='/create-user'>Create User</Link></li>
                                         <li className='text-xl text-white font-semibold hover:text-[#053B50] cursor-pointer ' onClick={handleLogOut}>Logout</li>
                                     </ul>
                                 </div> :

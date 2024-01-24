@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Nav from "./components/Nav";
 import UserList from "./components/UserList";
 import UserDetails from "./components/UserDetails";
+import CreateUser from "./components/CreateUser";
 
 function App() {
 
@@ -30,7 +31,10 @@ const router=createBrowserRouter([
          path:'/user-details/:id',
          element:<UserDetails/>
       },
-     
+     {
+      path:'create-user',
+      element:<CreateUser/>
+     }
     ]
   }
   
