@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { authSelector } from '../redux/reducers/authReducer';
+import UserList from '../components/UserList';
 
 
 function Home() {
@@ -12,6 +13,7 @@ function Home() {
         navigate('/login')
     }
     return (
+        <>{ !isAuthenticated?
         <div className=''>
             <div className='flex p-7 justify-between'>
                 <div className='w-[50%]'>
@@ -31,6 +33,9 @@ function Home() {
                 </div>
             </div>
         </div>
+    : <UserList/>    
+    }
+        </>
     )
 }
 

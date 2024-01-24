@@ -26,7 +26,7 @@ const handleSubmit=async(e)=>{
     try{
            const data=await login(loginData);
              dispatch(action.setUser(loginData))   ;
-             navigate('/users')  ; 
+             navigate('/')  ; 
     }
     catch(err){
         console.log(err);

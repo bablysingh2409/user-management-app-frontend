@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Nav from "./components/Nav";
 import UserList from "./components/UserList";
+import UserDetails from "./components/UserDetails";
 
 function App() {
 
@@ -26,9 +27,10 @@ const router=createBrowserRouter([
         element:<Login/>
       },
       {
-        path:'/users',
-        element:<UserList/>
-      }
+         path:'/user-details/:id',
+         element:<UserDetails/>
+      },
+     
     ]
   }
   
