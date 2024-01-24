@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { login } from '../services/api';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+import { authSelector,action } from '../redux/reducers/authReducer';
 
 function Login() {
 const [loginData,setLoginData]=useState({
@@ -8,6 +10,8 @@ const [loginData,setLoginData]=useState({
     password:''
 });
 const navigate=useNavigate();
+const dispatch=useDispatch();
+
 
 const handleChange=(e)=>{
     const {name,value}=e.target;
@@ -20,10 +24,9 @@ const handleChange=(e)=>{
 const handleSubmit=async(e)=>{
     e.preventDefault();
     try{
-           const res=await login(loginData)
-           if(res.status===200){
-            navigate('/');
-           }
+           const data=await login(loginData);
+             dispatch(action.setUser(loginData))   ;
+             navigate('/')  ; 
     }
     catch(err){
         console.log(err);
@@ -32,7 +35,7 @@ const handleSubmit=async(e)=>{
     return (
         <div className='w-[70%] p-3 m-auto '>
             <div className=' w-[80%] m-auto p-4 shadow-lg shadow-[#0766AD] mt-6 border-2 '>
-                <span className='text-2xl font-bold cursor-pointer hover:text-[#0766AD]'>&times;</span>
+                
                 <h2 className='text-center font-semibold text-5xl p-3 text-[#0766AD]'>Login</h2>
                 <form className='flex flex-col w-ful  justify-center p-4 ' onSubmit={handleSubmit} >
 
@@ -50,6 +53,9 @@ const handleSubmit=async(e)=>{
                     <button type="submit" className='w-[40%] p-3 border-2 border-[#0766AD] bg-[#0766AD] text-white rounded-md 
             text-xl m-auto font-semibold hover:bg-[#91C8E4] hover:text-black mt-7'>Login</button>
                 </form>
+                <Link to="/signup">
+            <p className='text-center text-blue-700 mt-[-1rem] hover:text-[#0766AD] cursor-pointer'>Or SignUp instead</p>
+           </Link>
             </div>
         </div>
 
