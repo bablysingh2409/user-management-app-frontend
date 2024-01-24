@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import UserList from "./components/UserList";
 import UserDetails from "./components/UserDetails";
 import CreateUser from "./components/CreateUser";
+import EditUser from "./components/EditUser";
 
 function App() {
 
@@ -34,6 +35,10 @@ const router=createBrowserRouter([
      {
       path:'create-user',
       element:<CreateUser/>
+     },
+     {
+      path:'edit-user/:id',
+      element:<EditUser/>
      }
     ]
   }

@@ -31,9 +31,9 @@ export const deleteUser=async(userId)=>{
     }
 }
 
-export const updateUser=async(userId)=>{
+export const updateUser=async(userData)=>{
     try{
-    const res=await axios.put(`http://localhost:5500/user/users/${userId}`);
+    const res=await axios.put(`http://localhost:5500/user/users/${userData._id}`,userData);
     const data=await res.data;
     return data;
     }catch(err){

@@ -22,9 +22,9 @@ export const addUser = createAsyncThunk('users/addUser', async (user) => {
   });
   
   // Async action to edit an existing user
-  export const editUser = createAsyncThunk('users/editUser', async (userId) => {
+  export const editUser = createAsyncThunk('users/editUser', async (userData) => {
     try{
-    const data = await updateUser(userId);
+    const data = await updateUser(userData);
     return data;
     }catch(err){
         return err;

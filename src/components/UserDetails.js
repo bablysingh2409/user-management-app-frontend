@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../redux/reducers/userReducer';
+import { userSelector } from '../redux/reducers/userReducer'
 
 function UserDetails() {
    const {id}=useParams();
    const {users}=useSelector(userSelector);
    const [user,setUser]=useState([]);
+   const navigate=useNavigate();
 
    useEffect(()=>{
        const selectedUser= users.filter((user)=>user._id===id) ;
        setUser(selectedUser);
    },[])
 
-
+const handleEdit=(userId)=>{
+       navigate(`/edit-user/${userId}`)
+}
 
   return (
     <div className=' p-2 h-[70vh]'>
@@ -34,7 +37,7 @@ function UserDetails() {
                             <button className='mt-3 p-2  bg-[#B80000] border-2 border-[#B80000] w-[50%] m-auto text-xl font-bold text-white hover:border-2 hover:bg-white
                              hover:text-[#B80000] rounded'>Delete</button>
                             <button className='mt-3 p-2  border-2 border-[#294B29] bg-[#294B29] w-[50%] m-auto text-xl font-bold text-white hover:text-[#294B29]
-                                     hover:bg-white rounded'>Edit</button>
+                                     hover:bg-white rounded' onClick={()=>handleEdit(u._id)}>Edit</button>
                          </div>
                     </div>)
                 })
