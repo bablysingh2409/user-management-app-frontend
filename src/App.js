@@ -3,6 +3,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Nav from "./components/Nav";
+import UserList from "./components/UserList";
 
 function App() {
 
@@ -23,6 +24,10 @@ const router=createBrowserRouter([
       {
         path:'/login',
         element:<Login/>
+      },
+      {
+        path:'/users',
+        element:<UserList/>
       }
     ]
   }

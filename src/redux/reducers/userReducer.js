@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchUsers,addUser,removeUser,editUser } from "../actions/userActions";
-import { action } from "./authReducer";
+
 
 const INITIAL_STATE = {
     users: [],
@@ -21,8 +21,8 @@ const userSlice = createSlice({
                 state.status='succeeded';
                  state.users=action.payload
             })
-            .addCase(fetchUsers.rejected,(state)=>{
-                state.status='failed',
+            .addCase(fetchUsers.rejected,(state,action)=>{
+                state.status='failed';
                 state.error=action.error
             })
             .addCase(addUser.fulfilled,(state,action)=>{
