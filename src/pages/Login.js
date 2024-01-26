@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { login } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { authSelector, action } from '../redux/reducers/authReducer';
-import Loader from '../components/Loader';
+import { useDispatch} from 'react-redux';
+import {  action } from '../redux/reducers/authReducer';
+
 
 function Login() {
     const [loginData, setLoginData] = useState({
@@ -12,7 +12,7 @@ function Login() {
     });
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { isAuthenticated } = useSelector(authSelector);
+   
 
 
     const handleChange = (e) => {
@@ -34,12 +34,6 @@ function Login() {
             console.log(err);
         }
     }
-
-    // if (!isAuthenticated) {
-    //     return <div className='relative top-[5rem]'>
-    //         <Loader />
-    //     </div>
-    // }
     return (
         <div className='w-[70%] p-3 m-auto '>
             <div className=' w-[80%] m-auto p-4 shadow-lg shadow-[#0766AD] mt-6 border-2 '>

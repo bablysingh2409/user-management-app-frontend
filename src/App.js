@@ -19,7 +19,6 @@ const router=createBrowserRouter([
     children:[
       {
         path:'/',
-        // element:isAuthenticated ? <Home/>: <Navigate to="/" />
         element:<Home/>
     
       },

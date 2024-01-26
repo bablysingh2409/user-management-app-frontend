@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {signup} from '../services/api'
-import { useDispatch,useSelector } from 'react-redux';
-import { authSelector,action } from '../redux/reducers/authReducer';
+
+
 
 
 function Signup() {
@@ -17,7 +17,7 @@ function Signup() {
         state: 'Maharashtra'
     });
 
-    const dispatch=useDispatch();
+    
     const navigate=useNavigate();
 
 

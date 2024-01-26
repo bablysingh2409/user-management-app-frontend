@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addNewUser, getAllUser, deleteUser, updateUser,getSearchUser } from "../../services/userServices";
+import { addNewUser, getAllUser, deleteUser, updateUser} from "../../services/userServices";
 import { saveToLocalStorage, getFromLocalStorage } from "../../services/localStorage";
 
 // Async action to fetch all users

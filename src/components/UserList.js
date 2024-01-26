@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { userSelector, action } from '../redux/reducers/userReducer';
 import { fetchUsers } from '../redux/actions/userActions';
 import { useNavigate } from 'react-router-dom';
+import { authSelector } from '../redux/reducers/authReducer';
+import Loader from './Loader';
 
 function UserList() {
     const { users } = useSelector(userSelector);
+    const {isAuthenticated}=useSelector(authSelector)
     const dispatch = useDispatch();
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
 
@@ -15,14 +17,14 @@ function UserList() {
     useEffect(() => {
 
         const getAllUser = async () => {
-            setLoading(true);
+           
             try {
 
                 dispatch(fetchUsers());
-                setLoading(false);
+              
             } catch (err) {
                 console.log(err);
-                setLoading(false);
+                
             }
         }
         getAllUser();
@@ -33,10 +35,6 @@ function UserList() {
 
     const handleClick = (userId) => {
         navigate(`/user-details/${userId}`)
-    }
-
-    if (loading) {
-        return <p>Loading.....</p>
     }
 
     const saveFilterSettings = (filterOption) => {
@@ -52,6 +50,11 @@ function UserList() {
         dispatch(action.sortZA());
     }
 
+    if (!isAuthenticated) {
+        return <div className='relative top-[5rem]'>
+            <Loader />
+        </div>
+    }
 
 
 
