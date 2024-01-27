@@ -26,9 +26,16 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const data = await login(loginData);
+            const res = await login(loginData);
+            if(res.status===200){
             dispatch(action.setUser(loginData));
             navigate('/');
+            }
+            else{
+            
+             alert(res.response.data.message);
+            }
+            
         }
         catch (err) {
             console.log(err);

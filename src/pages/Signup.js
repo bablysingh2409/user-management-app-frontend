@@ -70,13 +70,17 @@ function Signup() {
         try {
 
             const res = await signup(userData);
-         
             if(res.status===200){
             navigate('/login');
             }
+            else{
+                alert(res.response.data.message);
+            
+            }
         } catch (error) {
             // Handle signup failure, show an error message, etc.
-            console.error('Signup failed:', error.message);
+            console.error('Signup failed:', error);
+           
         }
 
     };
