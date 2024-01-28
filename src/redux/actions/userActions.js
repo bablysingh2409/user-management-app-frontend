@@ -58,7 +58,7 @@ export const editUser = createAsyncThunk('users/editUser', async (userData) => {
 // Async action to delete a user
 export const removeUser = createAsyncThunk('users/removeUser', async (userId) => {
   try {
-    const data = await deleteUser(userId);
+     await deleteUser(userId);
 
      // Update local storage
      const updatedRecords = getFromLocalStorage('users').filter(

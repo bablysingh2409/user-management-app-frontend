@@ -17,9 +17,9 @@ function EditUser() {
 
     useEffect(() => {
         // Fetching the user details based on the user id
-        const selectedUser = users.find((user) => user._id === id);
+        const selectedUser = users.find((user) => user._id === id); 
         setUserData(selectedUser);
-    }, []);
+    }, [id,users]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

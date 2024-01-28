@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { userSelector, action } from '../redux/reducers/userReducer';
 import { fetchUsers } from '../redux/actions/userActions';
@@ -28,7 +28,7 @@ function UserList() {
             }
         }
         getAllUser();
-    }, [])
+    }, [dispatch])
 
 
 

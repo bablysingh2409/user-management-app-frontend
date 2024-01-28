@@ -14,7 +14,7 @@ function UserDetails() {
    useEffect(()=>{
        const selectedUser= users.filter((user)=>user._id===id) ;
        setUser(selectedUser);
-   },[])
+   },[id,users])
 
 const handleEdit=(userId)=>{
        navigate(`/edit-user/${userId}`)
